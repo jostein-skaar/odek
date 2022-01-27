@@ -1,4 +1,5 @@
 import './style.css';
+import logoIconFile from '../favicon.svg';
 
 import { Engine, Render, Bodies, Composite, Runner, Mouse, MouseConstraint, Constraint, Events } from 'matter-js';
 
@@ -49,7 +50,7 @@ function createLogoIcon(): any {
     //   friction: 0.01,
     render: {
       sprite: {
-        texture: './favicon.svg',
+        texture: logoIconFile,
         xScale: 1,
         yScale: 1,
       },
