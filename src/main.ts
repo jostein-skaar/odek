@@ -22,6 +22,7 @@ var render = Render.create({
     height,
     background: '#fff',
     wireframes: false,
+    pixelRatio: window.devicePixelRatio,
     // showStats: true,
     // showPerformance: true,
     // showAngleIndicator: true,
@@ -33,7 +34,9 @@ var render = Render.create({
 // var boxB = Bodies.rectangle(game.width / 2 + 50, 50, 80, 80);
 // var ground = Bodies.rectangle(game.width / 2, game.height - 30, game.width, 60, { isStatic: true });
 
-const logoIconPosition: Matter.Vector = { x: game.width / 2, y: game.height / 2 };
+const logoIconPosition: Matter.Vector = { x: width / 2, y: height / 2 };
+
+console.log(logoIconPosition, { width, height }, { gw: game.width, gh: game.height });
 
 // setTimeout(() => {
 //   t1.angularVelocity = 0;
@@ -60,6 +63,7 @@ function createLogoIcon(): any {
 
 let currentLogoIcon = createLogoIcon();
 
+console.log(currentLogoIcon.position.x, currentLogoIcon.position.y);
 const elastic = Constraint.create({
   pointA: logoIconPosition,
   bodyB: currentLogoIcon,
