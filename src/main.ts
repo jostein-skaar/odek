@@ -90,9 +90,11 @@ const elastic = Constraint.create({
 //   }
 // });
 
+var bodyA = Bodies.rectangle(width / 5, 0, 50, 50);
+
 // add all of the bodies to the world
 // Composite.add(engine.world, [boxA, boxB, ground, currentLogoIcon, elastic]);
-Composite.add(engine.world, [currentLogoIcon, elastic]);
+Composite.add(engine.world, [currentLogoIcon, elastic, bodyA]);
 
 // add mouse control
 const mouse = Mouse.create(render.canvas);
@@ -142,6 +144,28 @@ Render.run(render);
 
 // create runner
 var runner = Runner.create();
+
+let counter = 0;
+let counter2 = 0;
+Events.on(runner, 'afterTick', function () {
+  counter += 1;
+  counter2 += 1;
+
+  // every 1.5 sec
+  if (counter >= 60 * 1) {
+    Body.setVelocity(bodyA, { x: 0, y: -10 });
+    // Body.setAngle(bodyC, -Math.PI * 0.26);
+    // Body.setAngularVelocity(bodyD, 0.2);
+
+    // reset counter
+    counter = 0;
+  }
+
+  if (counter2 > 60 * 5) {
+    Body.setPosition(bodyA, { x: width / 5, y: height / 2 });
+    counter2 = 0;
+  }
+});
 
 // run the engine
 Runner.run(runner, engine);
