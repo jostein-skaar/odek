@@ -1,7 +1,7 @@
 import './style.css';
 import logoIconFile from '../favicon.svg';
 
-import { Engine, Render, Bodies, Composite, Runner, Mouse, MouseConstraint, Constraint, Events } from 'matter-js';
+import { Engine, Render, Bodies, Composite, Runner, Mouse, MouseConstraint, Constraint, Events, Body } from 'matter-js';
 
 const game = document.querySelector<HTMLCanvasElement>('#game')!;
 
@@ -45,7 +45,7 @@ console.log(logoIconPosition, { width, height }, { gw: game.width, gh: game.heig
 // }, 3000);
 
 function createLogoIcon(): any {
-  return Bodies.circle(logoIconPosition.x, logoIconPosition.y, 25, {
+  const b = Bodies.circle(logoIconPosition.x, logoIconPosition.y, 25, {
     label: 'logoIcon',
     density: 0.004,
     //   frictionAir: 0.06,
@@ -59,6 +59,8 @@ function createLogoIcon(): any {
       },
     },
   });
+  Body.setInertia(b, Infinity);
+  return b;
 }
 
 let currentLogoIcon = createLogoIcon();
