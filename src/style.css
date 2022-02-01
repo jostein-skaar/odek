@@ -48,6 +48,8 @@ header {
 
 main {
   text-align: center;
+  margin: 0 auto;
+  max-width: 80vw;
 }
 
 .game-bg {
@@ -76,13 +78,12 @@ main {
 .show-bg {
   opacity: 1;
   visibility: visible;
-  transition: visibility 1s linear, opacity 1s linear;
 }
 
 .game-bg .show-h1 {
   opacity: 1;
   visibility: visible;
-  transition: visibility 1s linear 1s, opacity 1s linear 1s;
+  transition-delay: 0.75s;
 }
 
 @media (prefers-color-scheme: dark) {
