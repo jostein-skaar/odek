@@ -1,5 +1,6 @@
 :root {
-  --main-color: #5092c1;
+  --logo-color: #337db1;
+  --main-color: #0c3450;
 }
 
 html,
@@ -13,6 +14,9 @@ body {
   /* height: 100%; */
   /* background-color: #1fd537; */
   /* color: #fff; */
+  color: var(--main-color);
+  /* color: #111; */
+  background-color: #fff;
 }
 *,
 *:before,
@@ -20,22 +24,68 @@ body {
   box-sizing: inherit;
 }
 
-main {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+a {
+  color: inherit;
+}
+
+header {
   text-align: center;
-  color: var(--main-color);
   margin-top: 100px;
+  margin-bottom: 50px;
 }
 
-.logo {
+.logo-button {
+  all: unset;
+  cursor: pointer;
+  background-image: url('./logo.svg');
   width: 200px;
+  height: 50px;
 }
 
-canvas#game {
+.logo-button:focus {
+  outline: 1px dotted;
+}
+
+main {
+  text-align: center;
+}
+
+.game-bg {
+  /* We need to have display: none inline in html because this css is not loaded instantly. 
+  Not doing this causes the transition to happen on page load. */
+  display: block !important;
   position: absolute;
   top: 0;
   left: 0;
-  z-index: -1;
+  opacity: 0;
+  visibility: hidden;
+  background-color: #fff;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  /* transition: 1s; */
+  transition: visibility 0.5s linear, opacity 0.5s linear;
+}
+
+.game-bg h1 {
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 1s linear 1s, opacity 1s linear 1s;
+}
+
+.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (prefers-color-scheme: dark) {
+  html,
+  body {
+    color: #eee;
+    background: #111;
+  }
+
+  .game-bg {
+    background-color: #111;
+  }
 }
