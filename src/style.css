@@ -2,6 +2,8 @@
   --logo-color: #337db1;
   --main-color: #0c3450;
 
+  --color-light: #eee;
+
   /* Classy Palette
   #337DB1
   #3B4856
@@ -41,7 +43,7 @@ a {
 
 header {
   text-align: center;
-  margin-top: 100px;
+  margin-top: 80px;
   margin-bottom: 50px;
 }
 
@@ -63,47 +65,65 @@ main {
   max-width: 80vw;
 }
 
-.game-bg {
-  /* We need to have display: none inline in html because this css is not loaded instantly. 
-  Not doing this causes the transition to happen on page load. */
-  display: block !important;
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  visibility: hidden;
-  background-color: #fff;
-  /* width: 100vw;
-  height: 100vh; */
-  text-align: center;
-  /* transition: 1s; */
-  /* transition: visibility 0.5s linear, opacity 0.5s linear; */
-  /* transition: visibility 0.5s linear, opacity 0.5s linear;
-   */
+header,
+main {
+  opacity: 1;
+  visibility: visible;
   transition: 0.5s linear;
-  z-index: 10;
+  transition-property: opacity, visibility;
 }
 
 body.game-open {
   overflow: hidden;
   position: fixed;
-  width: 100vw;
-  height: 100vh;
 }
 
-.show {
-  opacity: 1;
-  visibility: visible;
+.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.show-canvas {
+  top: 0;
+}
+
+.remove {
+  display: none;
 }
 
 @media (prefers-color-scheme: dark) {
   html,
   body {
-    color: #eee;
+    color: var(--color-light);
     background: #111;
   }
+}
 
-  .game-bg {
-    background-color: #111;
-  }
+canvas {
+  position: fixed;
+  top: 100vh;
+  /* opacity: 0;
+  visibility: hidden; */
+  transition: top 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+  /* transition-property: opacity, visibility; */
+}
+
+.close-button {
+  all: unset;
+  cursor: pointer;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--main-color);
+  background-color: transparent;
+  transition: all 0.5s linear;
+}
+
+.close-button:hover {
+  color: var(--color-light);
+  background-color: var(--logo-color);
 }

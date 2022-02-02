@@ -8,9 +8,11 @@ let currentLogoIcon: Body | null;
 let logoIconPosition: Matter.Vector | null;
 let shouldFire: boolean = false;
 
-export function createGame(element: HTMLElement) {
-  const width = window.innerWidth;
-  const height = window.innerHeight;
+export function createGame(element: HTMLElement): HTMLCanvasElement {
+  let width = window.innerWidth;
+  let height = window.innerHeight;
+  // width = 600;
+  // height = 400;
   engine = Engine.create();
   render = Render.create({
     element,
@@ -89,6 +91,8 @@ export function createGame(element: HTMLElement) {
   Render.run(render);
   var runner = Runner.create();
   Runner.run(runner, engine);
+
+  return render.canvas;
 }
 
 export function destroyGame() {
