@@ -1,6 +1,17 @@
 :root {
   --logo-color: #337db1;
   --main-color: #0c3450;
+
+  /* Classy Palette
+  #337DB1
+  #3B4856
+  #9FADBD
+  #AA6082
+  #742F50 */
+}
+
+html {
+  box-sizing: border-box;
 }
 
 html,
@@ -62,28 +73,27 @@ main {
   opacity: 0;
   visibility: hidden;
   background-color: #fff;
-  width: 100vw;
-  height: 100vh;
+  /* width: 100vw;
+  height: 100vh; */
   text-align: center;
   /* transition: 1s; */
   /* transition: visibility 0.5s linear, opacity 0.5s linear; */
-  transition: visibility 0.5s linear, opacity 0.5s linear;
+  /* transition: visibility 0.5s linear, opacity 0.5s linear;
+   */
+  transition: 0.5s linear;
+  z-index: 10;
 }
 
-.game-bg h1 {
-  opacity: 0;
-  visibility: hidden;
+body.game-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
 }
 
-.show-bg {
+.show {
   opacity: 1;
   visibility: visible;
-}
-
-.game-bg .show-h1 {
-  opacity: 1;
-  visibility: visible;
-  transition-delay: 0.75s;
 }
 
 @media (prefers-color-scheme: dark) {
