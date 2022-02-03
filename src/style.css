@@ -30,6 +30,7 @@ body {
   color: var(--main-color);
   /* color: #111; */
   background-color: #fff;
+  width: 100%;
 }
 *,
 *:before,
@@ -41,10 +42,12 @@ a {
   color: inherit;
 }
 
-header {
+.content {
+  width: 80vw;
+  margin: 0 auto;
   text-align: center;
-  margin-top: 80px;
-  margin-bottom: 50px;
+  padding-top: 80px;
+  padding-bottom: 10px;
 }
 
 .logo-button {
@@ -53,24 +56,11 @@ header {
   background-image: url('/logo.svg');
   width: 200px;
   height: 50px;
+  margin-bottom: 50px;
 }
 
 .logo-button:focus {
   outline: 1px dotted;
-}
-
-main {
-  text-align: center;
-  margin: 0 auto;
-  max-width: 80vw;
-}
-
-header,
-main {
-  opacity: 1;
-  visibility: visible;
-  transition: 0.5s linear;
-  transition-property: opacity, visibility;
 }
 
 body.game-open {
@@ -86,26 +76,10 @@ body.game-open {
 .show-canvas {
   top: 0;
 }
-
-.remove {
-  display: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html,
-  body {
-    color: var(--color-light);
-    background: #111;
-  }
-}
-
 canvas {
   position: fixed;
   top: 100vh;
-  /* opacity: 0;
-  visibility: hidden; */
   transition: top 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.2);
-  /* transition-property: opacity, visibility; */
 }
 
 .close-button {
@@ -126,4 +100,12 @@ canvas {
 .close-button:hover {
   color: var(--color-light);
   background-color: var(--logo-color);
+}
+
+@media (prefers-color-scheme: dark) {
+  html,
+  body {
+    color: var(--color-light);
+    background: #333;
+  }
 }
