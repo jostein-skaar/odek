@@ -8,6 +8,11 @@ let currentLogoIcon: Body | null;
 let logoIconPosition: Matter.Vector | null;
 let shouldFire: boolean = false;
 
+let pixelRatio = window.devicePixelRatio;
+if (pixelRatio !== 1 && pixelRatio !== 2 && pixelRatio !== 3) {
+  pixelRatio = 1;
+}
+
 export function createGame(element: HTMLElement): HTMLCanvasElement {
   let width = window.innerWidth;
   let height = window.innerHeight;
@@ -22,10 +27,10 @@ export function createGame(element: HTMLElement): HTMLCanvasElement {
       height,
       background: '#E6F4F1',
       wireframes: false,
-      pixelRatio: window.devicePixelRatio,
-      // showStats: true,
-      // showPerformance: true,
-      // showAngleIndicator: true,
+      pixelRatio: pixelRatio,
+      showStats: true,
+      showPerformance: true,
+      showAngleIndicator: true,
     },
   });
 
@@ -45,7 +50,15 @@ export function createGame(element: HTMLElement): HTMLCanvasElement {
     },
   });
 
-  Composite.add(engine.world, [currentLogoIcon, elastic]);
+  const bug = createBug({ x: width / 2, y: 50 });
+
+  let frame = 1;
+  setInterval(() => {
+    frame = frame === 1 ? 2 : 1;
+    bug.render.sprite.texture = `/assets/bug-${frame}@${pixelRatio}.png?v={VERSJON}`;
+  }, 100);
+
+  Composite.add(engine.world, [currentLogoIcon, elastic, bug]);
 
   const mouse = Mouse.create(render.canvas);
   const mouseConstraint = MouseConstraint.create(engine, {
@@ -125,5 +138,29 @@ function createLogoIcon(position: Matter.Vector): Body {
     },
   });
   Body.setInertia(b, Infinity);
+  return b;
+}
+
+function createBug(position: Matter.Vector): Body {
+  // this.load.spritesheet('helt', `/assets/helt-sprite@${fiksForPikselratio(1)}.png?v={VERSJON}`, {
+  //   frameWidth: fiksForPikselratio(32),
+  //   frameHeight: fiksForPikselratio(40),
+  //   margin: 1,
+  //   spacing: 2,
+  // });
+  //pixelRatio
+
+  const b = Bodies.rectangle(position.x, position.y, 40, 50, {
+    label: 'bug',
+    isStatic: true,
+    density: 0.004,
+    render: {
+      sprite: {
+        texture: `/assets/bug-1@${pixelRatio}.png?v={VERSJON}`,
+        xScale: 1,
+        yScale: 1,
+      },
+    },
+  });
   return b;
 }

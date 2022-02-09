@@ -1,15 +1,32 @@
 :root {
-  --logo-color: #337db1;
-  --main-color: #0c3450;
+  --primary-color: #5092c1;
+  --secondary-color: #e49d22;
 
+  --logo-color: #5092c1;
   --color-light: #eee;
 
-  /* Classy Palette
-  #337DB1
-  #3B4856
-  #9FADBD
-  #AA6082
-  #742F50 */
+  --bg-color: #5092c1;
+  --bg-color: #2b628a;
+  --text-color: #fff;
+  /* --text-color: #002650; */
+
+  /* Dark color scheme - not complete yet */
+  --dark-text-color: #eee;
+  --dark-bg-color: #333;
+  --dark-bg-color: #002650;
+
+  /*
+  Game background: #E6F4F1
+
+  */
+  /* 
+  https://mycolor.space/?hex=%23337DB1&sub=1
+Switch Palette
+#337DB1
+#002650
+#E49D22
+#E6F4F1
+*/
 }
 
 html {
@@ -27,9 +44,9 @@ body {
   /* height: 100%; */
   /* background-color: #1fd537; */
   /* color: #fff; */
-  color: var(--main-color);
+  color: var(--text-color);
   /* color: #111; */
-  background-color: #fff;
+  background-color: var(--bg-color);
   width: 100%;
 }
 *,
@@ -100,12 +117,4 @@ canvas {
 .close-button:hover {
   color: var(--color-light);
   background-color: var(--logo-color);
-}
-
-@media (prefers-color-scheme: dark) {
-  html,
-  body {
-    color: var(--color-light);
-    background: #333;
-  }
 }
