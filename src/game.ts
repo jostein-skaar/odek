@@ -50,7 +50,7 @@ export function createGame(element: HTMLElement): HTMLCanvasElement {
     },
   });
 
-  const bug = createBug({ x: width / 2, y: 50 });
+  const bug = createBug({ x: width / 2, y: 100 });
 
   let frame = 1;
   setInterval(() => {
