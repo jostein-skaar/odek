@@ -157,8 +157,8 @@ function createBug(position: Matter.Vector): Body {
     render: {
       sprite: {
         texture: `/assets/bug-1@${pixelRatio}.png?v={VERSJON}`,
-        xScale: 1,
-        yScale: 1,
+        xScale: 1 / pixelRatio,
+        yScale: 1 / pixelRatio,
       },
     },
   });
