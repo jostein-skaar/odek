@@ -28,9 +28,9 @@ export function createGame(element: HTMLElement): HTMLCanvasElement {
       background: '#E6F4F1',
       wireframes: false,
       pixelRatio: pixelRatio,
-      showStats: true,
-      showPerformance: true,
-      showAngleIndicator: true,
+      // showStats: true,
+      // showPerformance: true,
+      // showAngleIndicator: true,
     },
   });
 
