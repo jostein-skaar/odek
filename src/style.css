@@ -2,12 +2,11 @@
   --primary-color: #5092c1;
   --secondary-color: #e49d22;
 
-  --logo-color: #5092c1;
   --color-light: #eee;
 
   --bg-color: #5092c1;
-  --bg-color: #2b628a;
-  --text-color: #fff;
+  --bg-color: #fffafa;
+  --text-color: #2b628a;
   /* --text-color: #002650; */
 
   /* Dark color scheme - not complete yet */
@@ -19,7 +18,10 @@
   Game background: #E6F4F1
 
   */
-  /* 
+  /*
+  
+  https://www.rapidtables.com/web/css/css-color.html#white
+
   https://mycolor.space/?hex=%23337DB1&sub=1
 Switch Palette
 #337DB1
@@ -41,7 +43,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* overflow: hidden; */
-  /* height: 100%; */
+  height: 100%;
   /* background-color: #1fd537; */
   /* color: #fff; */
   color: var(--text-color);
