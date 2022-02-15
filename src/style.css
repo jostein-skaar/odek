@@ -35,6 +35,10 @@ html {
   box-sizing: border-box;
 }
 
+body {
+  touch-action: pan-x pan-y;
+}
+
 html,
 body {
   margin: 0;
