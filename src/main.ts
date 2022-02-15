@@ -8,6 +8,10 @@ logo.addEventListener('click', () => {
 
 function startGame() {
   document.body.classList.add('game-open');
+
+  const viewportmeta = document.querySelector('meta[name=viewport]');
+  viewportmeta.setAttribute('content', 'initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0');
+
   const gameElement = createGame(document.body);
   setTimeout(() => {
     // Need to wait to the canvas is added to the dom to be able to have transition.
