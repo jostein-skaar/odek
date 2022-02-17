@@ -63,29 +63,36 @@ a {
 
 .content {
   width: 80vw;
+  max-width: 800px;
   margin: 0 auto;
   text-align: center;
   padding-top: 80px;
   padding-bottom: 10px;
 }
 
-.logo-button {
+.button-but-not {
   all: unset;
   cursor: pointer;
+}
+
+.button-as-link {
+  text-decoration: underline;
+}
+
+.logo-button {
   background-image: url('/logo.svg');
   width: 200px;
   height: 50px;
   margin-bottom: 50px;
 }
 
-.logo-button:focus {
+.button-but-not:focus {
   outline: 1px dotted;
 }
 
 body.game-open {
   overflow: hidden;
   position: fixed;
-  touch-action: pan-x pan-y;
 }
 
 .hide {
@@ -120,4 +127,10 @@ canvas {
 .close-button:hover {
   color: var(--color-light);
   background-color: var(--logo-color);
+}
+
+#anagram {
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  font-size: 1.6rem;
 }
