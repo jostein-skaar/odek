@@ -60,16 +60,44 @@ body {
 a {
   color: inherit;
 }
+header {
+  text-align: center;
+  overflow: hidden;
+}
+.header-content {
+  padding-top: 80px;
+  height: 160px;
+  background-color: var(--primary-color);
+}
 
-.content {
+svg {
+  height: 60px;
+  width: 100%;
+  min-width: 800px;
+}
+
+svg .shape-fill {
+  fill: var(--primary-color);
+}
+
+/* @media (max-width: 480px) {
+  svg {
+    width: 200%;
+  }
+  svg .shape-fill {
+    fill: var(--secondary-color);
+  }
+} */
+
+main {
   width: 80vw;
   max-width: 800px;
   margin: 0 auto;
   text-align: center;
-  padding-top: 80px;
+  padding-top: 50px;
   padding-bottom: 10px;
+  font-size: 1.4rem;
 }
-
 .button-but-not {
   all: unset;
   cursor: pointer;
