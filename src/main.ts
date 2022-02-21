@@ -5,8 +5,6 @@ import './style.css';
 // @ts-ignore
 const tween = KUTE.fromTo('#path1', { path: '#path1' }, { path: '#path2' }, { repeat: 9999, duration: 3000, yoyo: true }).start(null);
 
-prepareAnagramAnimation();
-
 const startGameButtons = document.querySelectorAll<HTMLButtonElement>('.button-start-game')!;
 startGameButtons.forEach((button) => {
   button.addEventListener('click', () => {
@@ -40,53 +38,4 @@ function startGame() {
       }, 500);
     });
   }, 50);
-}
-
-function prepareAnagramAnimation() {
-  const anagram = document.querySelector<HTMLElement>('#anagram')!;
-  const words = [
-    'ODEK',
-    'EKDO',
-    'OEDK',
-    'DOKE',
-    'KDEO',
-    'OKED',
-    'DEOK',
-    'OEKD',
-    'DEKO',
-    'KDOE',
-    'DKOE',
-    'KODE',
-    'EDKO',
-    'DKEO',
-    'EODK',
-    'OKDE',
-    'EOKD',
-    'DOEK',
-    'KEOD',
-    'EKOD',
-    'KOED',
-    'EDOK',
-    'KEDO',
-    'ODKE',
-  ];
-
-  let index = 0;
-  let pause = false;
-  setInterval(() => {
-    if (pause) {
-      return;
-    }
-    anagram.innerText = words[index];
-    if (index === 0 || index === 11) {
-      pause = true;
-      setTimeout(() => {
-        pause = false;
-      }, 2000);
-    }
-    index++;
-    if (index > words.length - 1) {
-      index = 0;
-    }
-  }, 200);
 }
