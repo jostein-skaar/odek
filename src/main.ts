@@ -3,7 +3,7 @@ import KUTE from 'kute.js';
 import './style.css';
 
 // @ts-ignore
-const tween = KUTE.fromTo('#path1', { path: '#path1' }, { path: '#path2' }, { repeat: 9999, duration: 2000, yoyo: true }).start(null);
+const tween = KUTE.fromTo('#path1', { path: '#path1' }, { path: '#path2' }, { repeat: 9999, duration: 3000, yoyo: true }).start(null);
 
 prepareAnagramAnimation();
 
