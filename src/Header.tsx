@@ -3,7 +3,7 @@ import React from 'react';
 import { useState } from 'react';
 import './Header.css';
 
-class Header extends React.Component {
+export default class Header extends React.Component {
   pathRef1: React.RefObject<SVGPathElement>;
   pathRef2: React.RefObject<SVGPathElement>;
   constructor(props: any) {
@@ -50,5 +50,3 @@ class Header extends React.Component {
     );
   }
 }
-
-export default Header;
