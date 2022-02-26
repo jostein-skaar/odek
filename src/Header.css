@@ -1,0 +1,27 @@
+.Header {
+  text-align: center;
+  overflow: hidden;
+}
+
+.Header .header-content {
+  padding-top: 80px;
+  height: 190px;
+  background-color: var(--primary-color);
+}
+
+.Header svg {
+  height: 30px;
+  width: 100%;
+  min-width: 800px;
+}
+
+.Header svg .shape-fill {
+  fill: var(--primary-color);
+}
+
+.Header .logo-button {
+  background-image: url('/logo.svg');
+  width: 200px;
+  height: 50px;
+  margin-bottom: 50px;
+}

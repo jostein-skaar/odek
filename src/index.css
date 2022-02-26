@@ -60,25 +60,6 @@ body {
 a {
   color: inherit;
 }
-header {
-  text-align: center;
-  overflow: hidden;
-}
-.header-content {
-  padding-top: 80px;
-  height: 190px;
-  background-color: var(--primary-color);
-}
-
-svg {
-  height: 30px;
-  width: 100%;
-  min-width: 800px;
-}
-
-svg .shape-fill {
-  fill: var(--primary-color);
-}
 
 /* @media (max-width: 480px) {
   svg {
@@ -105,13 +86,6 @@ main {
 
 .button-as-link {
   text-decoration: underline;
-}
-
-.logo-button {
-  background-image: url('/logo.svg');
-  width: 200px;
-  height: 50px;
-  margin-bottom: 50px;
 }
 
 .button-but-not:focus {

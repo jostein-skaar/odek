@@ -1,9 +1,15 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
 import { createGame, destroyGame } from './game';
-import KUTE from 'kute.js';
-import './style.css';
 
-// @ts-ignore
-const tween = KUTE.fromTo('#path1', { path: '#path1' }, { path: '#path2' }, { repeat: 9999, duration: 3000, yoyo: true }).start(null);
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
 
 const startGameButtons = document.querySelectorAll<HTMLButtonElement>('.button-start-game')!;
 startGameButtons.forEach((button) => {
@@ -15,7 +21,7 @@ startGameButtons.forEach((button) => {
 function startGame() {
   document.body.classList.add('game-open');
 
-  const viewportmeta = document.querySelector('meta[name=viewport]');
+  const viewportmeta = document.querySelector('meta[name=viewport]')!;
   viewportmeta.setAttribute('content', 'initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0');
 
   const gameElement = createGame(document.body);
