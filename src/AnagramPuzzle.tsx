@@ -56,9 +56,9 @@ export function DropSquare(props: DropSquareProps) {
     props.onDragOver(ev);
   }
   function handleDrop(ev: any) {
-    console.log('DropSquare: handleDrop');
+    console.log('DropSquare: handleDrop', props.index);
     ev.currentTarget.classList.remove('on-drag-over');
-    props.onDrop(ev);
+    props.onDrop(ev, props.index);
   }
   return (
     <span
@@ -78,16 +78,20 @@ export default class AnagramPuzzle extends React.Component<AnagramProps> {
   //     super(props);
   //   }
 
-  handleDragStart = (ev: any, id: any) => {
-    console.log('AnagramPuzzle: handleDragStart:', id);
-    ev.dataTransfer.setData('id', id);
+  // TODO: Må bruke state slik at den kan settes
+
+  handleDragStart = (ev: any, index: number) => {
+    console.log('AnagramPuzzle: handleDragStart:', index);
+    ev.dataTransfer.setData('index', index);
   };
   handleDragOver = (ev: any) => {
     // console.log('AnagramPuzzle: handleDragOver');
     ev.preventDefault();
   };
-  handleDrop = (ev: any) => {
+  handleDrop = (ev: any, targetIndex: number) => {
     console.log('AnagramPuzzle: handleDrop');
+    var sourceIndex = ev.dataTransfer.getData('index');
+    console.log('AnagramPuzzle: ', sourceIndex, targetIndex);
     ev.preventDefault();
   };
 
@@ -115,7 +119,7 @@ export default class AnagramPuzzle extends React.Component<AnagramProps> {
                 char={''}
                 index={index}
                 onDragOver={(ev: any) => this.handleDragOver(ev)}
-                onDrop={(ev: any) => this.handleDrop(ev)}
+                onDrop={(ev: any) => this.handleDrop(ev, index)}
               />
             );
           })}
