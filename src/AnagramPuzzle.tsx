@@ -1,5 +1,11 @@
-import React from 'react';
+import { useState } from 'react';
 import './AnagramPuzzle.css';
+
+// https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API
+// https://mdn.github.io/dom-examples/drag-and-drop/copy-move-DataTransfer.html
+// https://github.com/rajeshpillai/youtube-react-components/blob/master/src/AppDragDropDemo.js
+// view-source:https://mdn.github.io/dom-examples/drag-and-drop/copy-move-DataTransfer.html
+// https://github.com/timruffles/mobile-drag-drop
 
 interface DragSquareProps {
   char: string;
@@ -17,19 +23,23 @@ interface DropSquareProps {
 
 interface AnagramProps {
   anagram: string;
+  solution: string;
 }
 
 export function DragSquare(props: DragSquareProps) {
-  function handleDragStart(ev: any) {
-    console.log('DragSquare: handleDragEnter');
+  const handleDragStart = (ev: any) => {
+    // console.log('DragSquare: handleDragEnter');
     ev.currentTarget.classList.add('on-drag-start');
     props.onDragStart(ev, props.index);
-  }
-  function handleDragEnd(ev: any) {
-    console.log('DragSquare: handleDragEnd');
-    // TODO: Only remove if drag was not accepted.
-    ev.currentTarget.classList.remove('on-drag-start');
-  }
+  };
+
+  const handleDragEnd = (ev: any) => {
+    // console.log('DragSquare: handleDragEnd');
+    if (!props.isUsed) {
+      ev.currentTarget.classList.remove('on-drag-start');
+    }
+  };
+
   return (
     <span
       className={`DragSquare ${props.isUsed ? 'on-drag-start' : ''}`}
@@ -43,23 +53,27 @@ export function DragSquare(props: DragSquareProps) {
 }
 
 export function DropSquare(props: DropSquareProps) {
-  function handleDragEnter(ev: any) {
-    console.log('DropSquare: handleDragEnter');
+  const handleDragEnter = (ev: any) => {
+    // console.log('DropSquare: handleDragEnter');
     ev.currentTarget.classList.add('on-drag-over');
-  }
-  function handleDragLeave(ev: any) {
-    console.log('DropSquare: handleDragLeave');
+  };
+
+  const handleDragLeave = (ev: any) => {
+    // console.log('DropSquare: handleDragLeave');
     ev.currentTarget.classList.remove('on-drag-over');
-  }
-  function handleDragOver(ev: any) {
+  };
+
+  const handleDragOver = (ev: any) => {
     // console.log('DropSquare: handleDragOver');
     props.onDragOver(ev);
-  }
-  function handleDrop(ev: any) {
-    console.log('DropSquare: handleDrop', props.index);
+  };
+
+  const handleDrop = (ev: any) => {
+    // console.log('DropSquare: handleDrop', props.index);
     ev.currentTarget.classList.remove('on-drag-over');
     props.onDrop(ev, props.index);
-  }
+  };
+
   return (
     <span
       className='DropSquare'
@@ -73,58 +87,89 @@ export function DropSquare(props: DropSquareProps) {
   );
 }
 
-export default class AnagramPuzzle extends React.Component<AnagramProps> {
+export function AnagramPuzzle(props: AnagramProps) {
   //   constructor(props: any) {
   //     super(props);
   //   }
 
-  // TODO: Må bruke state slik at den kan settes
+  const [anagramLetters, setAnargamLetters] = useState(Array.from(props.anagram));
+  const [solutionLetters, setSolutionLetters] = useState(Array(props.solution.length).fill(''));
 
-  handleDragStart = (ev: any, index: number) => {
-    console.log('AnagramPuzzle: handleDragStart:', index);
+  const reset = () => {
+    setAnargamLetters(Array.from(props.anagram));
+    setSolutionLetters(Array(props.solution.length).fill(''));
+  };
+
+  const handleDragStart = (ev: any, index: number) => {
+    // console.log('AnagramPuzzle: handleDragStart:', index);
     ev.dataTransfer.setData('index', index);
   };
-  handleDragOver = (ev: any) => {
+
+  const handleDragOver = (ev: any) => {
     // console.log('AnagramPuzzle: handleDragOver');
     ev.preventDefault();
   };
-  handleDrop = (ev: any, targetIndex: number) => {
-    console.log('AnagramPuzzle: handleDrop');
+
+  const handleDrop = (ev: any, targetIndex: number) => {
+    // console.log('AnagramPuzzle: handleDrop');
     var sourceIndex = ev.dataTransfer.getData('index');
-    console.log('AnagramPuzzle: ', sourceIndex, targetIndex);
+    // console.log('AnagramPuzzle: ', sourceIndex, targetIndex);
+    const tempSolutionLetters = [...solutionLetters];
+    tempSolutionLetters[targetIndex] = anagramLetters[sourceIndex];
+    setSolutionLetters(tempSolutionLetters);
     ev.preventDefault();
   };
 
-  render(): React.ReactNode {
-    return (
-      <div className='AnagramPuzzle'>
-        <div className='puzzle'>
-          {Array.from(this.props.anagram).map((char, index) => {
-            return (
-              <DragSquare
-                key={index}
-                isUsed={false}
-                char={char}
-                index={index}
-                onDragStart={(ev: any, id: any) => this.handleDragStart(ev, id)}
-              />
-            );
-          })}
+  const isSolutionCorrect: boolean | null = solutionLetters.includes('') ? null : solutionLetters.join('') === props.solution;
+
+  const description = (isSolutionCorrect: boolean | null) => {
+    if (isSolutionCorrect === null) {
+      return <div></div>;
+    }
+    if (isSolutionCorrect === true) {
+      return <div>Oh yeah!</div>;
+    }
+    if (isSolutionCorrect === false) {
+      return (
+        <div>
+          Ikke helt riktig det der.{' '}
+          <button className='button-but-not button-as-link' onClick={() => reset()}>
+            Prøv igjen!
+          </button>
         </div>
-        <div className='solution'>
-          {Array.from(this.props.anagram).map((_char, index) => {
-            return (
-              <DropSquare
-                key={index}
-                char={''}
-                index={index}
-                onDragOver={(ev: any) => this.handleDragOver(ev)}
-                onDrop={(ev: any) => this.handleDrop(ev, index)}
-              />
-            );
-          })}
-        </div>
+      );
+    }
+  };
+
+  return (
+    <div className='AnagramPuzzle'>
+      <div className='puzzle'>
+        {anagramLetters.map((char, index) => {
+          return (
+            <DragSquare
+              key={index}
+              isUsed={solutionLetters.includes(char)}
+              char={char}
+              index={index}
+              onDragStart={(ev: any, id: any) => handleDragStart(ev, id)}
+            />
+          );
+        })}
       </div>
-    );
-  }
+      <div className='solution'>
+        {solutionLetters.map((char, index) => {
+          return (
+            <DropSquare
+              key={index}
+              char={char}
+              index={index}
+              onDragOver={(ev: any) => handleDragOver(ev)}
+              onDrop={(ev: any) => handleDrop(ev, index)}
+            />
+          );
+        })}
+      </div>
+      <div className='description'>{description(isSolutionCorrect)}</div>
+    </div>
+  );
 }

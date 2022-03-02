@@ -1,8 +1,12 @@
+.AnagramPuzzle {
+  --margin: 25px;
+  --boxSize: 50px;
+}
 .AnagramPuzzle .puzzle {
   display: flex;
   justify-content: center;
-  column-gap: 25px;
-  margin-bottom: 25px;
+  column-gap: var(--margin);
+  margin-bottom: var(--margin);
 }
 
 .AnagramPuzzle .solution {
@@ -10,13 +14,18 @@
   justify-content: center;
 }
 
+.AnagramPuzzle .description {
+  margin-top: var(--margin);
+  height: var(--font-size);
+}
+
 .AnagramPuzzle .DragSquare,
 .AnagramPuzzle .DropSquare {
-  flex: 0 0 50px;
+  flex: 0 0 var(--boxSize);
   text-align: center;
   border: 1px solid #444;
-  height: 50px;
-  line-height: 50px;
+  height: var(--boxSize);
+  line-height: var(--boxSize);
   font-size: 30px;
   font-weight: bold;
 }
@@ -35,5 +44,5 @@
 }
 
 .AnagramPuzzle .DropSquare.on-drag-over {
-  background-color: lightblue;
+  background-color: var(--primary-color);
 }

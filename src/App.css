@@ -1,3 +1,4 @@
 .anagram-puzzle {
-  margin: 100px 0;
+  margin-top: 100px;
+  margin-bottom: calc(100px - var(--font-size));
 }
