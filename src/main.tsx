@@ -4,7 +4,6 @@ import './index.css';
 import App from './App';
 import { createGame, destroyGame } from './game';
 import { polyfill } from 'mobile-drag-drop';
-import 'mobile-drag-drop/default.css';
 
 polyfill();
 window.addEventListener('touchmove', function () {}, { passive: false });
