@@ -7,6 +7,8 @@ let render: Render | null;
 let currentLogoIcon: Body | null;
 let logoIconPosition: Matter.Vector | null;
 let shouldFire: boolean = false;
+const width = window.innerWidth;
+const height = window.innerHeight;
 
 let pixelRatio = window.devicePixelRatio;
 if (pixelRatio !== 1 && pixelRatio !== 2 && pixelRatio !== 3) {
@@ -14,11 +16,10 @@ if (pixelRatio !== 1 && pixelRatio !== 2 && pixelRatio !== 3) {
 }
 
 export function createGame(element: HTMLElement): HTMLCanvasElement {
-  let width = window.innerWidth;
-  let height = window.innerHeight;
   // width = 600;
   // height = 400;
   engine = Engine.create();
+  engine.gravity.y = 0;
   render = Render.create({
     element,
     engine: engine,
@@ -50,13 +51,33 @@ export function createGame(element: HTMLElement): HTMLCanvasElement {
     },
   });
 
-  const bug = createBug({ x: width / 2, y: 100 });
+  const bug = createBug({ x: -10, y: 100 });
 
   let frame = 1;
   setInterval(() => {
     frame = frame === 1 ? 2 : 1;
     bug.render.sprite.texture = `/assets/bug-${frame}@${pixelRatio}.png?v={VERSJON}`;
   }, 100);
+
+  let direction = 1;
+  setInterval(() => {
+    const currentPosition = { ...bug.position };
+    if (currentPosition.x < 0) {
+      direction = 1;
+    } else if (currentPosition.x > width) {
+      direction = -1;
+    }
+
+    if (currentPosition.y < 0 || currentPosition.y > height) {
+      currentPosition.x = -100;
+      currentPosition.y = 100;
+      Body.setPosition(bug, currentPosition);
+      Body.setAngularVelocity(bug, 0);
+    }
+
+    Body.setVelocity(bug, { x: 3 * direction, y: 0 });
+    Body.setAngle(bug, (direction * 90 * Math.PI) / 180);
+  }, 50);
 
   Composite.add(engine.world, [currentLogoIcon, elastic, bug]);
 
@@ -152,8 +173,8 @@ function createBug(position: Matter.Vector): Body {
 
   const b = Bodies.rectangle(position.x, position.y, 40, 50, {
     label: 'bug',
-    isStatic: true,
-    density: 0.004,
+    isStatic: false,
+    density: 0.01,
     render: {
       sprite: {
         texture: `/assets/bug-1@${pixelRatio}.png?v={VERSJON}`,
