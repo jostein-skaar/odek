@@ -56,6 +56,8 @@ export function DropSquare(props: DropSquareProps) {
   const handleDragEnter = (ev: any) => {
     // console.log('DropSquare: handleDragEnter');
     ev.currentTarget.classList.add('on-drag-over');
+    // https://github.com/timruffles/mobile-drag-drop
+    ev.preventDefault();
   };
 
   const handleDragLeave = (ev: any) => {

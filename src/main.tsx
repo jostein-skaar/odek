@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { createGame, destroyGame } from './game';
+import { polyfill } from 'mobile-drag-drop';
+
+polyfill();
+window.addEventListener('touchmove', function () {}, { passive: false });
 
 ReactDOM.render(
   <React.StrictMode>
