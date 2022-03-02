@@ -17,6 +17,7 @@ interface DragSquareProps {
 interface DropSquareProps {
   char: string;
   index: number;
+  isCorrect: boolean;
   onDragOver: any;
   onDrop: any;
 }
@@ -76,9 +77,14 @@ export function DropSquare(props: DropSquareProps) {
     props.onDrop(ev, props.index);
   };
 
+  let positionOkClassName = '';
+  if (props.isCorrect !== null) {
+    positionOkClassName = props.isCorrect ? ' correct-position' : ' wrong-position';
+  }
+
   return (
     <span
-      className='DropSquare'
+      className={`DropSquare${positionOkClassName}`}
       onDragOver={(ev) => handleDragOver(ev)}
       onDragEnter={(ev) => handleDragEnter(ev)}
       onDragLeave={(ev) => handleDragLeave(ev)}
@@ -116,14 +122,29 @@ export function AnagramPuzzle(props: AnagramProps) {
   const handleDrop = (ev: any, targetIndex: number) => {
     // console.log('AnagramPuzzle: handleDrop');
     var sourceIndex = ev.dataTransfer.getData('index').replace('i_', '');
-    console.log('AnagramPuzzle: ', sourceIndex, targetIndex);
+    // console.log('AnagramPuzzle: ', sourceIndex, targetIndex);
     const tempSolutionLetters = [...solutionLetters];
     tempSolutionLetters[targetIndex] = anagramLetters[sourceIndex];
     setSolutionLetters(tempSolutionLetters);
     ev.preventDefault();
   };
+  const handleDragEnd = (ev: any, index: number) => {
+    console.log('AnagramPuzzle: handleDragEnd', index);
+    const tempSolutionLetters = [...solutionLetters];
+    tempSolutionLetters[index] = '';
+    setSolutionLetters(tempSolutionLetters);
+    ev.preventDefault();
+  };
 
+  const isFinished = !solutionLetters.includes('');
   const isSolutionCorrect: boolean | null = solutionLetters.includes('') ? null : solutionLetters.join('') === props.solution;
+
+  const isCharacterCorrect = (char: string, index: number) => {
+    if (!isFinished) {
+      return null;
+    }
+    return props.solution.charAt(index) === char;
+  };
 
   const description = (isSolutionCorrect: boolean | null) => {
     if (isSolutionCorrect === null) {
@@ -154,7 +175,7 @@ export function AnagramPuzzle(props: AnagramProps) {
               isUsed={solutionLetters.includes(char)}
               char={char}
               index={index}
-              onDragStart={(ev: any, id: any) => handleDragStart(ev, id)}
+              onDragStart={(ev: any, index: number) => handleDragStart(ev, index)}
             />
           );
         })}
@@ -166,6 +187,7 @@ export function AnagramPuzzle(props: AnagramProps) {
               key={index}
               char={char}
               index={index}
+              isCorrect={isCharacterCorrect(char, index)}
               onDragOver={(ev: any) => handleDragOver(ev)}
               onDrop={(ev: any) => handleDrop(ev, index)}
             />

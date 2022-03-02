@@ -48,3 +48,12 @@
 .AnagramPuzzle .DropSquare.on-drag-over {
   background-color: var(--primary-color);
 }
+
+.AnagramPuzzle .DropSquare.correct-position {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.AnagramPuzzle .DropSquare.wrong-position {
+  background-color: var(--secondary-color);
+}
