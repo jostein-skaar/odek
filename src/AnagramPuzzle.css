@@ -1,6 +1,8 @@
 .AnagramPuzzle {
   --margin: 25px;
   --boxSize: 50px;
+
+  touch-action: none;
 }
 .AnagramPuzzle .puzzle {
   display: flex;
