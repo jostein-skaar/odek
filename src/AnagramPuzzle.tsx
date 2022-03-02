@@ -104,7 +104,8 @@ export function AnagramPuzzle(props: AnagramProps) {
 
   const handleDragStart = (ev: any, index: number) => {
     // console.log('AnagramPuzzle: handleDragStart:', index);
-    ev.dataTransfer.setData('index', index);
+    // If using 0, the mobile polyfil treats it as empty string.
+    ev.dataTransfer.setData('index', 'i_' + index);
   };
 
   const handleDragOver = (ev: any) => {
@@ -114,8 +115,8 @@ export function AnagramPuzzle(props: AnagramProps) {
 
   const handleDrop = (ev: any, targetIndex: number) => {
     // console.log('AnagramPuzzle: handleDrop');
-    var sourceIndex = ev.dataTransfer.getData('index');
-    // console.log('AnagramPuzzle: ', sourceIndex, targetIndex);
+    var sourceIndex = ev.dataTransfer.getData('index').replace('i_', '');
+    console.log('AnagramPuzzle: ', sourceIndex, targetIndex);
     const tempSolutionLetters = [...solutionLetters];
     tempSolutionLetters[targetIndex] = anagramLetters[sourceIndex];
     setSolutionLetters(tempSolutionLetters);
