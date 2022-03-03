@@ -148,7 +148,7 @@ export function AnagramPuzzle(props: AnagramProps) {
 
   const description = (isSolutionCorrect: boolean | null) => {
     if (isSolutionCorrect === null) {
-      return <div></div>;
+      return <div>(Dra og slipp for å løse anagrammet.)</div>;
     }
     if (isSolutionCorrect === true) {
       return <div>Oh yeah!</div>;
